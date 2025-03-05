@@ -1,55 +1,56 @@
-🏡 API de Proyectos Inmobiliarios
+# 🏡 API de Proyectos Inmobiliarios
 
 Un cliente desea desarrollar un sistema de visualización de proyectos inmobiliarios en un mapa interactivo. El objetivo del sistema es permitir a los usuarios explorar proyectos inmobiliarios en diferentes ubicaciones y obtener información detallada sobre ellos.
 
-Esta API, desarrollada con FastAPI, SQLAlchemy y Docker, permite la gestión de proyectos inmobiliarios, incluyendo la creación, actualización, eliminación y búsqueda de propiedades con filtros avanzados y visualización en mapas.
+API desarrollada con **FastAPI**, **SQLAlchemy** y **Docker** para gestionar proyectos inmobiliarios. Permite crear, actualizar, eliminar y buscar propiedades con filtros avanzados y visualización en mapas.
 
-📌 Requisitos Previos
+---
 
+## 📌 Requisitos Previos
 Antes de comenzar, asegúrate de tener instalado:
 
-Docker y Docker Compose
+- **Docker y Docker Compose**
+- **Python 3.12+** (si deseas ejecutar sin Docker)
+- **Poetry** o **pip** para manejar dependencias (opcional)
 
-Python 3.12+ (si deseas ejecutar sin Docker)
+---
 
-Poetry o pip para manejar dependencias (opcional)
+## 🚀 Instalación y Configuración con Docker
 
-🚀 Instalación y Configuración con Docker
-
-1️⃣ Clonar el Repositorio
-
+### 1️⃣ Clonar el Repositorio
+```bash
 git clone https://github.com/tu_usuario/proyecto-inmobiliario.git
 cd proyecto-inmobiliario
+```
 
-2️⃣ Configurar Variables de Entorno
-
-Renombra el archivo .env.example a .env y edita los valores:
-
+### 2️⃣ Configurar Variables de Entorno
+Renombra el archivo **.env.example** a **.env** y edita los valores:
+```ini
 DATABASE_URL=postgresql://postgres:password@db:5432/proyectosdb
 SECRET_KEY=clave_super_secreta
+```
 
-3️⃣ Levantar los Contenedores con Docker
-
+### 3️⃣ Levantar los Contenedores con Docker
+```bash
 docker-compose up --build
-
+```
 📌 Esto iniciará los servicios:
-
-✅ FastAPI en http://127.0.0.1:8000
-
-✅ PostgreSQL con persistencia de datos
+- ✅ **FastAPI** en [http://127.0.0.1:8000](http://127.0.0.1:8000)
+- ✅ **PostgreSQL** con persistencia de datos
 
 Si deseas correr en segundo plano:
-
+```bash
 docker-compose up -d
+```
 
-📡 Acceder a la API
+### 📡 Acceder a la API
+- **API disponible en**: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+- **Documentación interactiva en Swagger UI**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
-API disponible en: http://127.0.0.1:8000
+---
 
-Documentación interactiva en Swagger UI: http://127.0.0.1:8000/docs
-
-🛠 Estructura del Proyecto
-
+## 🛠 Estructura del Proyecto
+```bash
 📂 proyecto-inmobiliario/
 ├── 📂 app/
 │   ├── 📂 models/         # Modelos de la base de datos (SQLAlchemy)
@@ -66,82 +67,50 @@ Documentación interactiva en Swagger UI: http://127.0.0.1:8000/docs
 ├── alembic/              # Migraciones de base de datos
 ├── requirements.txt      # Dependencias del proyecto
 └── pytest.ini            # Configuración de pruebas
+```
 
-🔥 Endpoints de la API
+---
 
-Método
+## 🔥 Endpoints de la API
 
-Endpoint
+| Método  | Endpoint               | Descripción                        |
+|----------|------------------------|--------------------------------|
+| GET      | `/proyectos`           | Listar todos los proyectos    |
+| POST     | `/proyectos`           | Crear un nuevo proyecto       |
+| GET      | `/proyectos/{id}`      | Obtener detalles de un proyecto |
+| PUT      | `/proyectos/{id}`      | Actualizar un proyecto        |
+| DELETE   | `/proyectos/{id}`      | Eliminar un proyecto          |
+| GET      | `/buscar?tipo=&precio_max=` | Filtrar proyectos |
 
-Descripción
+---
 
-GET
+## 🗺 Visualización en Mapas
 
-/proyectos
+La API permite obtener datos de ubicación para representar los proyectos en mapas interactivos. Se pueden utilizar bibliotecas como **Leaflet.js** o **Google Maps API** para visualizar los datos en el frontend.
 
-Listar todos los proyectos
+---
 
-POST
-
-/proyectos
-
-Crear un nuevo proyecto
-
-GET
-
-/proyectos/{id}
-
-Obtener detalles de un proyecto
-
-PUT
-
-/proyectos/{id}
-
-Actualizar un proyecto
-
-DELETE
-
-/proyectos/{id}
-
-Eliminar un proyecto
-
-GET
-
-/buscar?tipo=&precio_max=
-
-Filtrar proyectos
-
-🗺 Visualización en Mapas
-
-📌 Opciones disponibles:
-
-Backend: Generación de mapas con Folium
-
-Frontend: Integración con Leaflet.js
-
-Interactividad: Marcadores con pop-ups mostrando detalles de los proyectos
-
-✅ Pruebas Automatizadas
-
-Ejecuta las pruebas con pytest dentro del contenedor:
-
+## ✅ Pruebas Automatizadas
+Ejecuta las pruebas con **pytest** dentro del contenedor:
+```bash
 pytest -v
+```
+📌 Incluye pruebas para:
+- ✔ Validación de datos
+- ✔ Endpoints REST
+- ✔ Manejo de base de datos
 
-📌 Incluye pruebas para: ✔ Validación de datos✔ Endpoints REST✔ Manejo de base de datos
+---
 
-📦 Administración de Base de Datos
+## 📦 Administración de Base de Datos
 
 Ejecutar migraciones dentro del contenedor:
-
+```bash
 docker exec -it api alembic upgrade head
+```
 
 Acceder a la base de datos PostgreSQL:
-
+```bash
 docker exec -it db psql -U postgres -d proyectosdb
-
-📄 Licencia
-
-Este proyecto está bajo la licencia MIT.
-
-🚀 ¡Listo para comenzar a desarrollar! 🎉
+```
 
